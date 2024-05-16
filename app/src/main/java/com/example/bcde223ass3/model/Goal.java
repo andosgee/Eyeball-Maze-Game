@@ -1,4 +1,4 @@
-package nz.ac.ara.ang.assessment2.eyeballmaze;
+package com.example.bcde223ass3.model;
 
 import java.util.ArrayList;
 //import java.util.Arrays;
