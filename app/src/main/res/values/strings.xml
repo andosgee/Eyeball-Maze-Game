@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BCDE223Ass3</string>
+    <string name="button_start">Start</string>
+    <string name="button_pause">Pause</string>
+    <string name="button_reset">Reset</string>
+    <string name="text_level">Current Level:</string>
 </resources>
