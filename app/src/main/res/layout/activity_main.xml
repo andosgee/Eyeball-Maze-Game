@@ -10,8 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/infoBoardTop"
-        android:layout_width="411dp"
-        android:layout_height="65dp"
+        android:layout_width="449dp"
+        android:layout_height="63dp"
         android:background="#648DE5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -176,7 +176,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird12"
+            android:id="@+id/imageGrid12"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
@@ -186,27 +186,27 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird13"
+            android:id="@+id/imageGrid13"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid9"
-            app:layout_constraintStart_toEndOf="@+id/imageGird12"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid12"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird14"
+            android:id="@+id/imageGrid14"
             android:layout_width="70dp"
             android:layout_height="070dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid10"
-            app:layout_constraintStart_toEndOf="@+id/imageGird13"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid13"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird15"
+            android:id="@+id/imageGrid15"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
@@ -214,98 +214,98 @@
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid11"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageGird14"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid14"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird16"
+            android:id="@+id/imageGrid16"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird12"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid12"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird17"
+            android:id="@+id/imageGrid17"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird13"
-            app:layout_constraintStart_toEndOf="@+id/imageGird16"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid13"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid16"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird18"
+            android:id="@+id/imageGrid18"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird14"
-            app:layout_constraintStart_toEndOf="@+id/imageGird17"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid14"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid17"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird19"
+            android:id="@+id/imageGrid19"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird15"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageGird18"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid18"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird20"
+            android:id="@+id/imageGrid20"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird16"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird21"
+            android:id="@+id/imageGrid21"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird17"
-            app:layout_constraintStart_toEndOf="@+id/imageGird20"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid17"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid20"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird22"
+            android:id="@+id/imageGrid22"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird18"
-            app:layout_constraintStart_toEndOf="@+id/imageGird21"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid18"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid21"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGird23"
+            android:id="@+id/imageGrid23"
             android:layout_width="70dp"
             android:layout_height="070dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="13dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageGird19"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid19"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageGird22"
+            app:layout_constraintStart_toEndOf="@+id/imageGrid22"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -313,8 +313,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="411dp"
-        android:layout_height="70dp"
+        android:layout_width="434dp"
+        android:layout_height="76dp"
         android:background="#648DE5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -324,7 +324,8 @@
             android:id="@+id/buttonStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="17dp"
+            android:onClick="startGame"
             android:text="@string/button_start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

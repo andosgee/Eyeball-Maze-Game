@@ -31,7 +31,7 @@ public class Level {
 	}
 	
 	public void setSquare(Square square, int x, int y) {
-		grid[y][x] = square;
+		grid[x][y] = square;
     }
 	
 	public Square getSquare(int x, int y) {
