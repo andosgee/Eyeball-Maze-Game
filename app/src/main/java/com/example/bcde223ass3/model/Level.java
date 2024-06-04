@@ -18,7 +18,7 @@ public class Level {
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
-		grid = new Square[height][width];
+		grid = new Square[width][height];
 	}
 	
 	//Get level dimensions
@@ -31,11 +31,11 @@ public class Level {
 	}
 	
 	public void setSquare(Square square, int x, int y) {
-		grid[x][y] = square;
+		grid[y][x] = square;
     }
 	
 	public Square getSquare(int x, int y) {
-        return grid[y][x];
+        return grid[x][y];
     }
 	
 }

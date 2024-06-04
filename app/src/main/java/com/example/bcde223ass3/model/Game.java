@@ -63,7 +63,7 @@ public class Game {
 	    if (currentLevelIndex == -1 || currentLevelIndex >= levels.size()) {
 	        throw new IllegalStateException("No level selected or invalid level index");
 	    } else {
-	        if (width <= getLevelWidth() && height <= getLevelHeight()) {
+	        if (width-1 <= getLevelWidth() && height-1 <= getLevelHeight()) {
 	        	goals.get(currentLevelIndex).addGoal(width, height);
 	        }else {
 	        	throw new IllegalArgumentException ("Height or Width is outside Bounds");
@@ -97,16 +97,18 @@ public class Game {
 	}
 	
 	// Setup Squares
-	public void addSquare(Square  square, int width, int height) {
+	public void addSquare(Square square, int width, int height) {
 		if (currentLevelIndex == -1 || currentLevelIndex >= levels.size()) {
-            throw new IllegalStateException("No level selected or invalid level index");
-        } else {
-        	 if (width <= getLevelWidth() && height <= getLevelHeight()) {
-        		 levels.get(currentLevelIndex).setSquare(square, width, height);
-        	 }else {
-        		 throw new IllegalArgumentException("Square position is outside the level boundaries");
-        	 }
-        }
+			throw new IllegalStateException("No level selected or invalid level index");
+		} else {
+			int levelWidth = getLevelWidth();
+			int levelHeight = getLevelHeight();
+			if (width >= 0 && width-1 <= levelWidth && height >= 0 && height-1 <= levelHeight) {
+				levels.get(currentLevelIndex).setSquare(square, width, height);
+			} else {
+				throw new IllegalArgumentException("Square position is outside the level boundaries");
+			}
+		}
 	}
 	
 	// Get the shape at position

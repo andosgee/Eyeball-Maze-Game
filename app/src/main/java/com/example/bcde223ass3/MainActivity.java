@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view){
         this.addGame();
         for (int width = 0; width < theGame.getLevelWidth(); width ++){
-            for (int height = 0; width < theGame.getLevelHeight(); height ++){
+            for (int height = 0; height < theGame.getLevelHeight(); height ++){
                 updateImageLayout(width, height);
             }
         }
@@ -97,37 +97,115 @@ public class MainActivity extends AppCompatActivity {
         return levelName;
     }
 
+    private Bitmap resizeImage(Bitmap image){
+        int desiredWidth = (int) getResources().getDisplayMetrics().density * 75;
+        int desiredHeight = (int) getResources().getDisplayMetrics().density * 75;
+        return Bitmap.createScaledBitmap(image, desiredWidth, desiredHeight, true);
+    }
+
     // Image Handler
     public void updateImageLayout(int width, int height){
         Color squareColour = theGame.getColorAt(width,height);
         Shape squareShape = theGame.getShapeAt(width, height);
-        ImageView square = levelImages[width][height];
-//        Drawable background = getDrawable(R.drawable.white_background);
-//        square.setBackground(background);
+        ImageView square = levelImages[height][width];
         Bitmap image;
+        Bitmap resizedImage;
         // Checks Square colour, Checks Square shape, applies sprite to board
         if (squareColour == Color.BLUE){
             switch (squareShape){
                 case STAR:
                     image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_star);
-                    square.setImageBitmap(image);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
                     break;
                 case FLOWER:
                     image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_flower);
-                    square.setImageBitmap(image);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
                     break;
                 case CROSS:
                     image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_cross);
-                    square.setImageBitmap(image);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
                     break;
                 case DIAMOND:
                     image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_diamond);
-                    square.setImageBitmap(image);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
                     break;
             }
         }
-
-
-
+        if (squareColour == Color.RED){
+            switch (squareShape){
+                case STAR:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_star);
+                  resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case FLOWER:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_flower);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case CROSS:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_cross);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case DIAMOND:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_diamond);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+            }
+        }
+        if (squareColour == Color.YELLOW){
+            switch (squareShape){
+                case STAR:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_star);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case FLOWER:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_flower);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case CROSS:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_cross);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case DIAMOND:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_diamond);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+            }
+        }
+        if (squareColour == Color.GREEN){
+            switch (squareShape){
+                case STAR:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_star);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case FLOWER:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_flower);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case CROSS:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_cross);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+                case DIAMOND:
+                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_diamond);
+                    resizedImage = resizeImage(image);
+                    square.setImageBitmap(resizedImage);
+                    break;
+            }
+        }
     }
 }
