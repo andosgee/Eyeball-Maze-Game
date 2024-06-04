@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         theGame.addSquare(new PlayableSquare(Color.RED, Shape.FLOWER), 2, 5);
         theGame.addEyeball(1, 0, Direction.UP);
         theGame.addGoal(2, 5);
+        this.setTileColor(2,5, "#e8b923");
+        this.setTileColor(1,0, "#00FF00");
         return levelName;
     }
 
@@ -207,5 +209,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void setTileColor (int x, int y, String chosenColor){
+        ImageView imageView = levelImages[x][y];
+        int color = android.graphics.Color.parseColor(chosenColor);
+        imageView.setBackgroundColor(color);
     }
 }
