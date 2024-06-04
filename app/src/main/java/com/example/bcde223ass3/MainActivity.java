@@ -6,6 +6,8 @@ import com.example.bcde223ass3.model.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 updateImageLayout(width, height);
             }
         }
+        this.addEyeballDirection();
 
     }
 
@@ -209,6 +212,63 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void addEyeballDirection(){
+        // Get eyeball properties
+        int eyeballRow = theGame.getEyeballRow();
+        int eyeballCol = theGame.getEyeballColumn();
+        Direction eyeballDirection = theGame.getEyeballDirection();
+
+        // Square for Eyeball
+        ImageView square = levelImages[eyeballRow][eyeballCol];
+
+        // Image Controllers
+        Bitmap eyeballImage;
+        Bitmap resizedImage;
+        Bitmap shapeImage = ((BitmapDrawable) square.getDrawable()).getBitmap();
+
+        // Switch Case for Loading Image
+        switch (eyeballDirection) {
+            case UP:
+                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_up);
+                resizedImage = resizeImage(eyeballImage);
+                break;
+            case DOWN:
+                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_down);
+                resizedImage = resizeImage(eyeballImage);
+                break;
+            case LEFT:
+                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_left);
+                resizedImage = resizeImage(eyeballImage);
+                break;
+            case RIGHT:
+                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_right);
+                resizedImage = resizeImage(eyeballImage);
+                break;
+            default:
+                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.unknown);
+                resizedImage = resizeImage(eyeballImage);
+                break;
+        }
+        Bitmap mergedImage = combineTwoImagesAsOne(shapeImage, resizedImage);
+        square.setImageBitmap(mergedImage);
+
+    }
+
+    public void squareClick(View view){
+        // Handle Clicks on Squares
+
+    }
+
+    private Bitmap combineTwoImagesAsOne(Bitmap imageOne, Bitmap imageTwo){
+        Bitmap resultImage = Bitmap.createBitmap(imageTwo.getWidth(),
+                imageTwo.getHeight(),
+                imageTwo.getConfig());
+        Canvas canvas = new Canvas(resultImage);
+        canvas.drawBitmap(imageOne, 0f,0f, null);
+        canvas.drawBitmap(imageTwo, 0, 0, null);
+        return resultImage;
     }
 
     private void setTileColor (int x, int y, String chosenColor){
