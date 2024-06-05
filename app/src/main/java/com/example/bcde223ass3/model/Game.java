@@ -158,53 +158,55 @@ public class Game {
 	
 	//Eyeball Moves 
 	public void moveTo(int x, int y) {
-		int eyeballY = getEyeballRow();
-		int eyeballX = getEyeballColumn();
+		int eyeballX = getEyeballRow();
+		int eyeballY = getEyeballColumn();
 		Direction facing;
 		boolean validMove;
 		if (eyeballX > y && eyeballY == x) {
 			facing = Direction.LEFT;
 			validMove = true;
-		}else if(eyeballX < y && eyeballY == x) {
+		} else if (eyeballX < y && eyeballY == x) {
 			facing = Direction.RIGHT;
 			validMove = true;
-		}else if(eyeballX == y && eyeballY > x) {
-			validMove = true;
-			facing = Direction.UP;
-		}else if(eyeballX == y && eyeballY < x) {
+		} else if (eyeballX == y && eyeballY > x) {
 			validMove = true;
 			facing = Direction.DOWN;
-		}else {
+		} else if (eyeballX == y && eyeballY < x) {
+			validMove = true;
+			facing = Direction.UP;
+		} else {
 			validMove = false;
 			facing = null;
 		}
 		if (validMove == true) {
-			eyeball.moveTo(x,y, facing);
+			eyeball.moveTo(y, x, facing);
+			System.out.println("Eyeball moved to: (" + x + ", " + y + ") facing " + facing);
 			// Check for a goal
-			if (hasGoalAt(x,y) == true) {
+			if (hasGoalAt(x, y) == true) {
 				completeGoal(x, y);
 			}
+		} else {
+			System.out.println("Invalid move attempted to: (" + x + ", " + y + ")");
 		}
 	}
-	
-	
+
 	public boolean isDirectionOK(int x, int y) {
-		int eyeballY = getEyeballRow();
-		int eyeballX = getEyeballColumn();
+		int eyeballX = getEyeballColumn(); // Corrected variable name
+		int eyeballY = getEyeballRow(); // Corrected variable name
 		boolean directionApproval;
-		boolean diagOrNorm = checkMoveDiagNorm( x, y);
+		boolean diagOrNorm = checkMoveDiagNorm(x, y);
 		Direction currentDirection = getEyeballDirection();
 		if (diagOrNorm == true) {
 			directionApproval = false;
-		}else if (eyeballY > x && currentDirection == Direction.DOWN ) {
+		} else if (eyeballY > x && currentDirection == Direction.UP) { // Adjusted comparison
 			directionApproval = false;
-		}else if(eyeballY < x && currentDirection == Direction.UP){
+		} else if (eyeballY < x && currentDirection == Direction.DOWN) { // Adjusted comparison
 			directionApproval = false;
-		}else if(eyeballX < y && currentDirection == Direction.LEFT){
+		} else if (eyeballX < y && currentDirection == Direction.LEFT) {
 			directionApproval = false;
-		}else if(eyeballX > y && currentDirection == Direction.RIGHT) {
+		} else if (eyeballX > y && currentDirection == Direction.RIGHT) {
 			directionApproval = false;
-		}else {
+		} else {
 			directionApproval = true;
 		}
 		return directionApproval;
@@ -225,34 +227,40 @@ public class Game {
 		}
 		return returnBoolDiag;
 	}
-	
+
 	public Message checkDirectionMessage(int x, int y) {
-		boolean checkDirection= isDirectionOK(x,y);
-		Message returnMessage;
-		if (checkDirection == false) {
-			if (y < getEyeballRow() && x < getEyeballColumn()) {
-				returnMessage = Message.MOVING_DIAGONALLY;
-			}else if(y > getEyeballRow() && x < getEyeballColumn()) {
-				returnMessage = Message.MOVING_DIAGONALLY;
-			}else if(y < getEyeballRow() && x > getEyeballColumn()) {
-				returnMessage = Message.MOVING_DIAGONALLY;
-			}else if(y > getEyeballRow() && x > getEyeballColumn()) {
-				returnMessage = Message.MOVING_DIAGONALLY;
-			}else {
-			returnMessage = Message.BACKWARDS_MOVE;
-			}
-		}else {
-				returnMessage = Message.OK;
+		Direction currentDirection = getEyeballDirection();
+		Direction intendedDirection;
+
+		// Determine the intended direction based on the movement
+		if (x < getEyeballRow()) {
+			intendedDirection = Direction.DOWN;
+		} else if (x > getEyeballRow()) {
+			intendedDirection = Direction.UP;
+		} else if (y < getEyeballColumn()) {
+			intendedDirection = Direction.RIGHT;
+		} else {
+			intendedDirection = Direction.LEFT;
 		}
-		return returnMessage;
+
+		// Check if the intended direction is opposite to the current direction
+		if ((currentDirection == Direction.UP && intendedDirection == Direction.DOWN) ||
+				(currentDirection == Direction.DOWN && intendedDirection == Direction.UP) ||
+				(currentDirection == Direction.LEFT && intendedDirection == Direction.RIGHT) ||
+				(currentDirection == Direction.RIGHT && intendedDirection == Direction.LEFT)) {
+			return Message.BACKWARDS_MOVE;
+		} else {
+			return Message.OK;
+		}
 	}
 	
-	
 	public Message MessageIfMovingTo(int x, int y) {
-		Color currentColor = getColorAt(getEyeballRow(),getEyeballColumn());
+		Color currentColor = getColorAt(getEyeballColumn(),getEyeballRow());
 		Color newColor = getColorAt(x,y);
-		Shape currentShape = getShapeAt(getEyeballRow(),getEyeballColumn());
+		Shape currentShape = getShapeAt(getEyeballColumn(),getEyeballRow());
 		Shape newShape = getShapeAt(x,y);
+		System.out.println("New Shape and Color:" + newColor + " " + newShape);
+		System.out.println("Current Shape and Color:" + currentColor + " " + currentShape);
 		Message returnMessage;
 		if (currentColor == newColor || currentShape == newShape) {
 			returnMessage = Message.OK;
@@ -261,25 +269,34 @@ public class Game {
 		}
 		return returnMessage;
 	}
-	
-	public boolean canMoveTo(int x, int y) {
-	    boolean moveApproval;
-	    // Check if the move is within the level boundaries
-	    if (x >= 0 && x < getLevelHeight() && y >= 0 && y < getLevelWidth()) {
-	        // Check if the move is not to a diagonal square
-	        if (x == getEyeballRow() || y == getEyeballColumn()) {
-	            Message canMove = MessageIfMovingTo(x, y);
-	            // Allow the move only if the message is OK
-	            moveApproval = canMove == Message.OK;
-	        } else {
-	            moveApproval = false; // Disallow diagonal moves
-	        }
-	    } else {
-	        moveApproval = false; // Disallow moves outside the level boundaries
-	    }
-	    return moveApproval;
+
+	public Message canMoveTo(int x, int y) {
+		System.out.println("Attempting to move to: (" + x + ", " + y + ")");
+		System.out.println("Current Eyeball position: (" + eyeball.getEyeballRow() + ", " + eyeball.getEyeballColumn() + ")");
+		System.out.println("Eyeball facing: " + eyeball.getDirection());
+
+		Message moveApproval;
+		Message moveMessage = MessageIfMovingTo(x, y);
+		System.out.println("Message from MessageIfMovingTo: " + moveMessage);
+
+		if (moveMessage == Message.OK) {
+			Message directionMessage = checkDirectionMessage(x, y);
+			System.out.println("Message from checkDirectionMessage: " + directionMessage);
+
+			if (directionMessage == Message.OK) {
+				moveApproval = Message.OK;
+			} else {
+				System.out.println("Move not allowed due to direction issue: " + directionMessage);
+				moveApproval = directionMessage;
+			}
+		} else {
+			System.out.println("Move not allowed due to shape/color issue: " + moveMessage);
+			moveApproval = moveMessage;
+		}
+
+		return moveApproval;
 	}
-	
+
 	public boolean hasBlankFreePathTo(int x, int y) {
 		int eyeballY = getEyeballRow();
 		int eyeballX = getEyeballColumn();

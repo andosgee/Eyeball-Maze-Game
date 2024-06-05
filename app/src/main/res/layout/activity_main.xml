@@ -55,6 +55,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -65,6 +66,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid0"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -75,6 +77,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid0"
             tools:srcCompat="@tools:sample/avatars" />
@@ -85,6 +88,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid1"
             tools:srcCompat="@tools:sample/avatars" />
@@ -96,6 +100,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid2"
@@ -107,6 +112,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid1"
             app:layout_constraintStart_toEndOf="@+id/imageGrid4"
             tools:srcCompat="@tools:sample/avatars" />
@@ -117,6 +123,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid2"
             app:layout_constraintStart_toEndOf="@+id/imageGrid5"
             tools:srcCompat="@tools:sample/avatars" />
@@ -128,6 +135,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid6"
@@ -139,6 +147,7 @@
             android:layout_height="070dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid4"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -149,6 +158,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid5"
             app:layout_constraintStart_toEndOf="@+id/imageGrid8"
             tools:srcCompat="@tools:sample/avatars" />
@@ -159,6 +169,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid6"
             app:layout_constraintStart_toEndOf="@+id/imageGrid9"
             tools:srcCompat="@tools:sample/avatars" />
@@ -170,6 +181,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid10"
@@ -181,6 +193,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid8"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -191,6 +204,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid9"
             app:layout_constraintStart_toEndOf="@+id/imageGrid12"
             tools:srcCompat="@tools:sample/avatars" />
@@ -201,6 +215,7 @@
             android:layout_height="070dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid10"
             app:layout_constraintStart_toEndOf="@+id/imageGrid13"
             tools:srcCompat="@tools:sample/avatars" />
@@ -212,6 +227,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid14"
@@ -223,6 +239,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid12"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -233,6 +250,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid13"
             app:layout_constraintStart_toEndOf="@+id/imageGrid16"
             tools:srcCompat="@tools:sample/avatars" />
@@ -243,6 +261,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid14"
             app:layout_constraintStart_toEndOf="@+id/imageGrid17"
             tools:srcCompat="@tools:sample/avatars" />
@@ -254,6 +273,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid18"
@@ -266,6 +286,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -278,6 +299,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid17"
             app:layout_constraintStart_toEndOf="@+id/imageGrid20"
             app:layout_constraintTop_toTopOf="parent"
@@ -290,6 +312,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid18"
             app:layout_constraintStart_toEndOf="@+id/imageGrid21"
             app:layout_constraintTop_toTopOf="parent"
@@ -303,6 +326,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="13dp"
+            android:onClick="squareClick"
             app:layout_constraintBottom_toTopOf="@+id/imageGrid19"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid22"

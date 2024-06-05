@@ -1,6 +1,8 @@
 package com.example.bcde223ass3;
 
 // Import the model
+import static android.widget.Toast.LENGTH_SHORT;
+
 import com.example.bcde223ass3.model.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
-
-
+import android.widget.Toast;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     Game theGame;
 
     ImageView[][] levelImages = new ImageView[4][6];
+    HashMap<ImageView, Square> squareMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -51,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
         levelImages[1][5] = findViewById(R.id.imageGrid21);
         levelImages[2][5] = findViewById(R.id.imageGrid22);
         levelImages[3][5] = findViewById(R.id.imageGrid23);
+
+        // Listeners for click on image
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 6; j++) {
+                // Create a BlankSquare by default
+                Square square = new BlankSquare();
+                squareMap.put(levelImages[i][j], square);
+
+                // Set click listener for the ImageView
+                levelImages[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        squareClick(v);
+                    }
+                });
+            }
+        }
+
 
     }
 
@@ -96,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         theGame.addSquare(new PlayableSquare(Color.BLUE, Shape.DIAMOND), 1, 0);
         theGame.addSquare(new PlayableSquare(Color.RED, Shape.FLOWER), 2, 5);
         theGame.addEyeball(1, 0, Direction.UP);
+//        theGame.
         theGame.addGoal(2, 5);
         this.setTileColor(2,5, "#e8b923");
         this.setTileColor(1,0, "#00FF00");
@@ -256,9 +278,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void squareClick(View view){
-        // Handle Clicks on Squares
+    public void handleClick(int x, int y) {
+        Message moveMessage = theGame.canMoveTo(x, y);
+        if ( moveMessage == Message.OK) {
+            // Move the eyeball
+            theGame.moveTo(x, y);
+            for (int width = 0; width < theGame.getLevelWidth(); width ++){
+                for (int height = 0; height < theGame.getLevelHeight(); height ++){
+                    updateImageLayout(width, height);
+                }
+            }
+            addEyeballDirection();
 
+
+            // Check if the new square is a goal
+            if (theGame.hasGoalAt(x, y)) {
+                theGame.completeGoal(x, y);
+                setTileColor(x, y, "#FFFFFF");  // Set to blank color
+            }
+        } else {
+            Toast.makeText(this, moveMessage.ordinal(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void squareClick(View view) {
+        int[] coords = getCoordinates(view);
+        if (coords[0] != -1 && coords[1] != -1) {
+            handleClick(coords[0], coords[1]);
+        }
+    }
+
+    private int[] getCoordinates(View view) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (levelImages[i][j] == view) {
+                    return new int[]{j, i}; // Return x, y coordinates
+                }
+            }
+        }
+        return new int[]{-1, -1}; // Invalid coordinates
     }
 
     private Bitmap combineTwoImagesAsOne(Bitmap imageOne, Bitmap imageTwo){
