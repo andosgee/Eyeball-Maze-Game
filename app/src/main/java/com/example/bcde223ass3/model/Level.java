@@ -13,29 +13,29 @@ public class Level {
 	private int width;
 	private int height;
 	private Square[][] grid;
-	
+
 	// Constructor
-	public Level(int width, int height) {
-		this.width = width;
-		this.height = height;
-		grid = new Square[width][height];
+	public Level(int rows, int columns) {
+		this.width = columns;
+		this.height = rows;
+		grid = new Square[rows][columns];
 	}
-	
+
 	//Get level dimensions
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public void setSquare(Square square, int x, int y) {
-		grid[y][x] = square;
-    }
-	
+		grid[x][y] = square;
+	}
+
 	public Square getSquare(int x, int y) {
-        return grid[x][y];
-    }
-	
+		return grid[x][y];
+	}
+
 }

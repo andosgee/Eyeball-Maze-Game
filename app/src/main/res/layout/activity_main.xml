@@ -61,17 +61,6 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageGrid4"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
-            android:onClick="squareClick"
-            app:layout_constraintBottom_toTopOf="@+id/imageGrid0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <ImageView
             android:id="@+id/imageGrid1"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -104,6 +93,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageGrid2"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageGrid4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:onClick="squareClick"
+            app:layout_constraintBottom_toTopOf="@+id/imageGrid0"
+            app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
