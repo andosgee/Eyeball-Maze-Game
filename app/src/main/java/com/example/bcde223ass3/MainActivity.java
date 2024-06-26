@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Setup Grid for images
         levelImages[0][0] = findViewById(R.id.imageGrid0);
         levelImages[0][1] = findViewById(R.id.imageGrid1);
         levelImages[0][2] = findViewById(R.id.imageGrid2);
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         switchSound = findViewById(R.id.switchSound);
     }
     @Override
+    // Destroys the media players on completion
     protected void onDestroy() {
         super.onDestroy();
         if (successPlayer != null) {
@@ -129,6 +131,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         this.addEyeballDirection();
+        moveCount = 0;
+
+        TextView moveCounter = findViewById(R.id.textViewMoveCounter);
+        moveCounter.setText(String.valueOf(moveCount));
     }
 
     public void addGame(){
