@@ -1,6 +1,5 @@
 package com.example.bcde223ass3;
 
-// Import the model
 import static android.widget.Toast.LENGTH_SHORT;
 
 import com.example.bcde223ass3.model.*;
@@ -13,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.drawable.Drawable;
@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView[][] levelImages = new ImageView[6][4];
     HashMap<ImageView, Square> squareMap = new HashMap<>();
+
+    private int prevRow = -1;
+    private int prevCol = -1;
+    private HashMap<Integer, Bitmap> imageCache = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -74,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-
-
     }
 
     public void startGame(View view){
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         this.addEyeballDirection();
-
     }
 
     public void addGame(){
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
         goalsRemainingText.setText(String.valueOf(theGame.getGoalCount()));
         TextView moveCounter = findViewById(R.id.textViewMoveCounter);
         moveCounter.setText(String.valueOf(moveCount));
+        Button resetButton = findViewById(R.id.buttonReset);
+        Button startButton = findViewById(R.id.buttonStart);
+        resetButton.setVisibility(View.VISIBLE);
+        startButton.setVisibility(View.INVISIBLE);
     }
 
     private String level1(){
@@ -131,202 +136,181 @@ public class MainActivity extends AppCompatActivity {
         return levelName;
     }
 
-    private Bitmap resizeImage(Bitmap image){
+    private Bitmap resizeImage(int resourceId) {
+        if (imageCache.containsKey(resourceId)) {
+            return imageCache.get(resourceId);
+        }
+
+        Bitmap image = BitmapFactory.decodeResource(getResources(), resourceId);
         int desiredWidth = (int) getResources().getDisplayMetrics().density * 75;
         int desiredHeight = (int) getResources().getDisplayMetrics().density * 75;
-        return Bitmap.createScaledBitmap(image, desiredWidth, desiredHeight, true);
+        Bitmap resizedImage = Bitmap.createScaledBitmap(image, desiredWidth, desiredHeight, true);
+
+        imageCache.put(resourceId, resizedImage);
+        return resizedImage;
     }
 
     // Image Handler
-    public void updateImageLayout(int row, int column){
-        Color squareColour = theGame.getColorAt(row,column);
+    public void updateImageLayout(int row, int column) {
+        Color squareColour = theGame.getColorAt(row, column);
         Shape squareShape = theGame.getShapeAt(row, column);
         ImageView square = levelImages[row][column];
-        Bitmap image;
-        Bitmap resizedImage;
+        int resourceId = -1;
+
         // Checks Square colour, Checks Square shape, applies sprite to board
-        if (squareColour == Color.BLUE){
-            switch (squareShape){
+        if (squareColour == Color.BLUE) {
+            switch (squareShape) {
                 case STAR:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_star);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
+                    resourceId = R.drawable.blue_star;
                     break;
                 case FLOWER:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_flower);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
+                    resourceId = R.drawable.blue_flower;
                     break;
                 case CROSS:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_cross);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
+                    resourceId = R.drawable.blue_cross;
                     break;
                 case DIAMOND:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.blue_diamond);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
+                    resourceId = R.drawable.blue_diamond;
+                    break;
+            }
+        } else if (squareColour == Color.RED) {
+            switch (squareShape) {
+                case STAR:
+                    resourceId = R.drawable.red_star;
+                    break;
+                case FLOWER:
+                    resourceId = R.drawable.red_flower;
+                    break;
+                case CROSS:
+                    resourceId = R.drawable.red_cross;
+                    break;
+                case DIAMOND:
+                    resourceId = R.drawable.red_diamond;
+                    break;
+            }
+        } else if (squareColour == Color.YELLOW) {
+            switch (squareShape) {
+                case STAR:
+                    resourceId = R.drawable.yellow_star;
+                    break;
+                case FLOWER:
+                    resourceId = R.drawable.yellow_flower;
+                    break;
+                case CROSS:
+                    resourceId = R.drawable.yellow_cross;
+                    break;
+                case DIAMOND:
+                    resourceId = R.drawable.yellow_diamond;
+                    break;
+            }
+        } else if (squareColour == Color.GREEN) {
+            switch (squareShape) {
+                case STAR:
+                    resourceId = R.drawable.green_star;
+                    break;
+                case FLOWER:
+                    resourceId = R.drawable.green_flower;
+                    break;
+                case CROSS:
+                    resourceId = R.drawable.green_cross;
+                    break;
+                case DIAMOND:
+                    resourceId = R.drawable.green_diamond;
                     break;
             }
         }
-        if (squareColour == Color.RED){
-            switch (squareShape){
-                case STAR:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_star);
-                  resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case FLOWER:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_flower);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case CROSS:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_cross);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case DIAMOND:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.red_diamond);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-            }
-        }
-        if (squareColour == Color.YELLOW){
-            switch (squareShape){
-                case STAR:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_star);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case FLOWER:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_flower);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case CROSS:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_cross);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case DIAMOND:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_diamond);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-            }
-        }
-        if (squareColour == Color.GREEN){
-            switch (squareShape){
-                case STAR:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_star);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case FLOWER:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_flower);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case CROSS:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_cross);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-                case DIAMOND:
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.green_diamond);
-                    resizedImage = resizeImage(image);
-                    square.setImageBitmap(resizedImage);
-                    break;
-            }
+
+        if (resourceId != -1) {
+            Bitmap resizedImage = resizeImage(resourceId);
+            square.setImageBitmap(resizedImage);
+        } else {
+            square.setImageDrawable(null); // Clear the image if no valid resourceId
         }
     }
 
-    private void addEyeballDirection(){
-        // Get eyeball properties
+    private void addEyeballDirection() {
+        // Clear previous eyeball image if it exists
+        if (prevRow != -1 && prevCol != -1) {
+            updateImageLayout(prevRow, prevCol);
+        }
+
+        // Get new eyeball properties
         int eyeballRow = theGame.getEyeballRow();
         int eyeballCol = theGame.getEyeballColumn();
         Direction eyeballDirection = theGame.getEyeballDirection();
 
+        // Update previous position variables
+        prevRow = eyeballRow;
+        prevCol = eyeballCol;
+
         // Square for Eyeball
         ImageView square = levelImages[eyeballRow][eyeballCol];
 
+        // Ensure the square has a drawable
+        if (square.getDrawable() == null) {
+            // Initialize with a blank square if necessary
+            square.setImageResource(R.drawable.blank_square);
+        }
+
         // Image Controllers
         Bitmap eyeballImage;
-        Bitmap resizedImage;
         Bitmap shapeImage = ((BitmapDrawable) square.getDrawable()).getBitmap();
 
         // Switch Case for Loading Image
+        int resourceId = -1;
         switch (eyeballDirection) {
             case UP:
-                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_up);
-                resizedImage = resizeImage(eyeballImage);
+                resourceId = R.drawable.eye_up;
                 break;
             case DOWN:
-                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_down);
-                resizedImage = resizeImage(eyeballImage);
+                resourceId = R.drawable.eye_down;
                 break;
             case LEFT:
-                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_left);
-                resizedImage = resizeImage(eyeballImage);
+                resourceId = R.drawable.eye_left;
                 break;
             case RIGHT:
-                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.eye_right);
-                resizedImage = resizeImage(eyeballImage);
+                resourceId = R.drawable.eye_right;
                 break;
             default:
-                eyeballImage = BitmapFactory.decodeResource(getResources(), R.drawable.unknown);
-                resizedImage = resizeImage(eyeballImage);
+                resourceId = R.drawable.unknown;
                 break;
         }
-        Bitmap mergedImage = combineTwoImagesAsOne(shapeImage, resizedImage);
-        square.setImageBitmap(mergedImage);
 
+        if (resourceId != -1) {
+            eyeballImage = resizeImage(resourceId);
+            Bitmap mergedImage = combineTwoImagesAsOne(shapeImage, eyeballImage);
+            square.setImageBitmap(mergedImage);
+        }
     }
 
     public void handleClick(int x, int y) {
         boolean moveMessage = theGame.canMoveTo(y, x);
         String illegalMoveMessage = "";
+
         if (moveMessage) {
-            // Move the eyeball
+            removeEyeballView();
             theGame.moveTo(y, x);
-            // Add to counter
-            moveCount ++;
+            moveCount++;
+
             TextView moveCounter = findViewById(R.id.textViewMoveCounter);
             moveCounter.setText(String.valueOf(moveCount));
 
-
-            System.out.println(theGame.hasGoalAt(y,x));
-            // Check if the new square is a goal
             if (theGame.getGoalCount() == 0) {
-                // Update goals remaining
                 int goalsRemaining = 0;
-                System.out.println(goalsRemaining);
-                System.out.println(theGame.getGoalCount());
-                System.out.println(theGame.getCompletedGoalCount());
-
                 TextView goalsRemainingText = findViewById(R.id.textViewGoalsLeft);
                 goalsRemainingText.setText(String.valueOf(goalsRemaining));
-
-                // Set tile color to blank or some indication of goal completion
                 setTileColor(y, x, "#FFFFFF");
             }
 
-
-            // Update the entire board
-            for (int column = 0; column < theGame.getLevelWidth(); column++) {
-                for (int row = 0; row < theGame.getLevelHeight(); row++) {
-                    updateImageLayout(row, column);
-                }
-            }
-
-            // Add eyeball direction after updating the board
+            updateImageLayout(theGame.getEyeballRow(), theGame.getEyeballColumn());
             addEyeballDirection();
 
-            // Check for game win condition
             if (theGame.getGoalCount() == 0) {
-                showAlertDialog("You Won!", "You beat the maze in "+moveCount+" moves, well done!", "Ok");
+                showAlertDialog("You Won!", "You beat the maze in " + moveCount + " moves, well done!", "Ok");
+                Button resetButton = findViewById(R.id.buttonReset);
+                Button startButton = findViewById(R.id.buttonStart);
+                resetButton.setVisibility(View.INVISIBLE);
+                startButton.setVisibility(View.VISIBLE);
             }
         } else {
             Message checkMessage = theGame.checkDirectionMessage(y, x);
@@ -345,8 +329,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void squareClick(View view) {
         int[] coords = getCoordinates(view);
         if (coords[0] != -1 && coords[1] != -1) {
@@ -363,6 +345,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return new int[]{-1, -1}; // Invalid coordinates
+    }
+
+    private void removeEyeballView(){
+        int eyeRow = theGame.getEyeballRow();
+        int eyeCol = theGame.getEyeballColumn();
+        this.updateImageLayout(eyeRow,eyeCol);
     }
 
     private Bitmap combineTwoImagesAsOne(Bitmap imageOne, Bitmap imageTwo){
@@ -391,6 +379,5 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
 }
