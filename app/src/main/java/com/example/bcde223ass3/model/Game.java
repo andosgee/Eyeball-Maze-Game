@@ -89,8 +89,6 @@ public class Game {
 	// Complete a Goal
 	public void completeGoal(int width, int height) {
 		goals.get(currentLevelIndex).completeGoal(width, height);
-		System.out.println(width + " " + height);
-		System.out.println(this.getCompletedGoalCount());
 		// Make blank
 		Square square = levels.get(currentLevelIndex).getSquare(width, height);
 		if (square instanceof PlayableSquare) {

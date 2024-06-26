@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.widget.Toast;
 import java.util.HashMap;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     Game theGame;
 
     int moveCount = 0;
+
+    private MediaPlayer successPlayer;
+    private MediaPlayer errorPlayer;
+    private Switch switchSound;
 
     ImageView[][] levelImages = new ImageView[6][4];
     HashMap<ImageView, Square> squareMap = new HashMap<>();
@@ -78,6 +83,42 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+        // Set up audio players and handlers
+        successPlayer = MediaPlayer.create(this, R.raw.success);
+        errorPlayer = MediaPlayer.create(this, R.raw.error);
+        switchSound = findViewById(R.id.switchSound);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (successPlayer != null) {
+            successPlayer.release();
+            successPlayer = null;
+        }
+        if (errorPlayer != null) {
+            errorPlayer.release();
+            errorPlayer = null;
+        }
+    }
+
+    // Method to play success sound
+    private void playSuccessSound() {
+        if (switchSoundEnabled()) {
+            successPlayer.start();
+        }
+    }
+
+    // Method to play error sound
+    private void playErrorSound() {
+        if (switchSoundEnabled()) {
+            errorPlayer.start();
+        }
+    }
+
+    // Method to check if sound is enabled via switchSound slider
+    private boolean switchSoundEnabled() {
+        Switch switchSound = findViewById(R.id.switchSound);
+        return switchSound.isChecked();
     }
 
     public void startGame(View view){
@@ -306,6 +347,7 @@ public class MainActivity extends AppCompatActivity {
             addEyeballDirection();
 
             if (theGame.getGoalCount() == 0) {
+                playSuccessSound();
                 showAlertDialog("You Won!", "You beat the maze in " + moveCount + " moves, well done!", "Ok");
                 Button resetButton = findViewById(R.id.buttonReset);
                 Button startButton = findViewById(R.id.buttonStart);
@@ -314,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             Message checkMessage = theGame.checkDirectionMessage(y, x);
+            playErrorSound();
             if (checkMessage != Message.OK) {
                 if (checkMessage == Message.MOVING_DIAGONALLY) {
                     illegalMoveMessage = "Move Not Allowed. Cannot move diagonally.";
