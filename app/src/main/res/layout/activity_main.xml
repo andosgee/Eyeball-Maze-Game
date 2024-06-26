@@ -36,6 +36,44 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toEndOf="@+id/levelName"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/goalsLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="11dp"
+            android:text="@string/goals_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewGoalsLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/goalsLeft" />
+
+        <TextView
+            android:id="@+id/movesMade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/moves_made"
+            app:layout_constraintStart_toEndOf="@+id/textViewCurrentLevel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewMoveCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@+id/movesMade"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -348,7 +386,7 @@
             android:id="@+id/buttonStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="23dp"
             android:onClick="startGame"
             android:text="@string/button_start"
             app:layout_constraintBottom_toBottomOf="parent"

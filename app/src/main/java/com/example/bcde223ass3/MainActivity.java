@@ -5,6 +5,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 import com.example.bcde223ass3.model.*;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.BitmapFactory;
@@ -22,6 +23,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     Game theGame;
+
+    int moveCount = 0;
 
     ImageView[][] levelImages = new ImageView[6][4];
     HashMap<ImageView, Square> squareMap = new HashMap<>();
@@ -92,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         levelName = this.level1();
         TextView currentLevelText = findViewById(R.id.textViewCurrentLevel);
         currentLevelText.setText(levelName);
+        TextView goalsRemainingText = findViewById(R.id.textViewGoalsLeft);
+        goalsRemainingText.setText(String.valueOf(theGame.getGoalCount()));
+        TextView moveCounter = findViewById(R.id.textViewMoveCounter);
+        moveCounter.setText(String.valueOf(moveCount));
     }
 
     private String level1(){
@@ -280,26 +287,64 @@ public class MainActivity extends AppCompatActivity {
 
     public void handleClick(int x, int y) {
         boolean moveMessage = theGame.canMoveTo(y, x);
-        if ( moveMessage == true) {
+        String illegalMoveMessage = "";
+        if (moveMessage) {
             // Move the eyeball
             theGame.moveTo(y, x);
-            for (int column = 0; column < theGame.getLevelWidth(); column ++){
-                for (int row = 0; row < theGame.getLevelHeight(); row ++){
+            // Add to counter
+            moveCount ++;
+            TextView moveCounter = findViewById(R.id.textViewMoveCounter);
+            moveCounter.setText(String.valueOf(moveCount));
+
+
+            System.out.println(theGame.hasGoalAt(y,x));
+            // Check if the new square is a goal
+            if (theGame.getGoalCount() == 0) {
+                // Update goals remaining
+                int goalsRemaining = 0;
+                System.out.println(goalsRemaining);
+                System.out.println(theGame.getGoalCount());
+                System.out.println(theGame.getCompletedGoalCount());
+
+                TextView goalsRemainingText = findViewById(R.id.textViewGoalsLeft);
+                goalsRemainingText.setText(String.valueOf(goalsRemaining));
+
+                // Set tile color to blank or some indication of goal completion
+                setTileColor(y, x, "#FFFFFF");
+            }
+
+
+            // Update the entire board
+            for (int column = 0; column < theGame.getLevelWidth(); column++) {
+                for (int row = 0; row < theGame.getLevelHeight(); row++) {
                     updateImageLayout(row, column);
                 }
             }
+
+            // Add eyeball direction after updating the board
             addEyeballDirection();
 
-
-            // Check if the new square is a goal
-            if (theGame.hasGoalAt(x, y)) {
-                theGame.completeGoal(x, y);
-                setTileColor(x, y, "#FFFFFF");  // Set to blank color
+            // Check for game win condition
+            if (theGame.getGoalCount() == 0) {
+                showAlertDialog("You Won!", "You beat the maze in "+moveCount+" moves, well done!", "Ok");
             }
         } else {
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            Message checkMessage = theGame.checkDirectionMessage(y, x);
+            if (checkMessage != Message.OK) {
+                if (checkMessage == Message.MOVING_DIAGONALLY) {
+                    illegalMoveMessage = "Move Not Allowed. Cannot move diagonally.";
+                } else if (checkMessage == Message.BACKWARDS_MOVE) {
+                    illegalMoveMessage = "Move Not Allowed. Cannot move backwards.";
+                }
+            } else {
+                Color currColor = theGame.getColorAt(theGame.getEyeballRow(), theGame.getEyeballColumn());
+                Shape currShape = theGame.getShapeAt(theGame.getEyeballRow(), theGame.getEyeballColumn());
+                illegalMoveMessage = "Move Not Allowed. Needs to be a " + currColor + " shape or a " + currShape + " shape.";
+            }
+            Toast.makeText(this, illegalMoveMessage, Toast.LENGTH_LONG).show();
         }
     }
+
 
 
     public void squareClick(View view) {
@@ -334,5 +379,18 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = levelImages[x][y];
         int color = android.graphics.Color.parseColor(chosenColor);
         imageView.setBackgroundColor(color);
+    }
+
+    private void showAlertDialog(String title ,String message, String buttonText){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(buttonText, (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

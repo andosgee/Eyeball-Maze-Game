@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">BCDE223Ass3</string>
+    <string name="app_name">Eyeball Maze</string>
     <string name="button_start">Start</string>
     <string name="button_pause">Pause</string>
     <string name="button_reset">Reset</string>
     <string name="text_level">Current Level:</string>
+    <string name="goals_left">Goals Remaining:</string>
+    <string name="moves_made">Moves Made:</string>
 </resources>
