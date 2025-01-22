@@ -19,11 +19,13 @@ For creating the model, there was a series of test cases provided that needed to
 - Movements of the Player
 - Creation, Completion, and Deletion of Goals
 - Game Rules, and ensuring the player follows them (no illegal moves)
+
 ![Model Tests](https://andrewdevelops.com/wp-content/uploads/2025/01/Test-Runs.png)
 ![Model Tests - File View](https://andrewdevelops.com/wp-content/uploads/2025/01/Tests.png)
 
 Once the model was completed, the development environment migrated into Android Studio to make the view for the application to make it a Android compatible app. The view consisted of the model, a controller for the model (handles the data entry and communication of the model and user), and XML files for the design of the application. 
 The view contained several images, buttons, sounds, and user input areas that allowed for the maze to run. 
+
 ![Game View - Home](https://andrewdevelops.com/wp-content/uploads/2024/07/Screenshot-2024-07-01-001708.png)
 ![Game View - Completion](https://andrewdevelops.com/wp-content/uploads/2024/07/Screenshot-2024-07-01-001740.png)
 ![Game View - Errors](https://andrewdevelops.com/wp-content/uploads/2025/01/Message-Diag.png)
